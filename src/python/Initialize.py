@@ -149,8 +149,7 @@ class MainScript(QtCore.QObject):
 		
 		# frameOptions = {'Attach' : 'AttachToFrame.py', 
 		#	'Orbit' : 'OrbitFrame.py'}
-		
-		self.pickTypeToScriptDict[2] = frameOptions
+		# self.pickTypeToScriptDict[2] = frameOptions
 		
 		gridOptions = {'Orbit' : rootPath + '/src/python/DefaultPickScripts/OrbitGridPoint.py',
 			'Place Gimbal' : rootPath + '/src/python/DefaultPickScripts/SelectDirection.py'}

@@ -1,46 +1,0 @@
-Reading package lists...
-Building dependency tree...
-Reading state information...
-doxygen is already the newest version.
-doxygen set to manually installed.
-libcppunit-dev is already the newest version.
-libcppunit-dev set to manually installed.
-libglu1-mesa-dev is already the newest version.
-libglu1-mesa-dev set to manually installed.
-libxaw7-dev is already the newest version.
-libxaw7-dev set to manually installed.
-libxrandr-dev is already the newest version.
-libxrandr-dev set to manually installed.
-libxxf86vm-dev is already the newest version.
-libxxf86vm-dev set to manually installed.
-libfreeimage-dev is already the newest version.
-libfreeimage-dev set to manually installed.
-libzzip-dev is already the newest version.
-libzzip-dev set to manually installed.
-nvidia-cg-toolkit is already the newest version.
-nvidia-cg-toolkit set to manually installed.
-libfreetype6-dev is already the newest version.
-libfreetype6-dev set to manually installed.
-The following extra packages will be installed:
-  libois-1.3.0
-The following NEW packages will be installed:
-  libboost-date-time-dev libois-1.3.0 libois-dev
-0 upgraded, 3 newly installed, 0 to remove and 6 not upgraded.
-Need to get 168 kB of archives.
-After this operation, 725 kB of additional disk space will be used.
-Do you want to continue [Y/n]? Get:1 http://us.archive.ubuntu.com/ubuntu/ oneiric/universe libboost-date-time-dev amd64 1.46.1.1 [2,536 B]
-Get:2 http://us.archive.ubuntu.com/ubuntu/ oneiric/universe libois-1.3.0 amd64 1.3.0+dfsg0-3 [54.7 kB]
-Get:3 http://us.archive.ubuntu.com/ubuntu/ oneiric/universe libois-dev amd64 1.3.0+dfsg0-3 [110 kB]
-Fetched 168 kB in 4s (35.0 kB/s)
-Selecting previously deselected package libboost-date-time-dev.
-(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 215794 files and directories currently installed.)
-Unpacking libboost-date-time-dev (from .../libboost-date-time-dev_1.46.1.1_amd64.deb) ...
-Selecting previously deselected package libois-1.3.0.
-Unpacking libois-1.3.0 (from .../libois-1.3.0_1.3.0+dfsg0-3_amd64.deb) ...
-Selecting previously deselected package libois-dev.
-Unpacking libois-dev (from .../libois-dev_1.3.0+dfsg0-3_amd64.deb) ...
-Setting up libboost-date-time-dev (1.46.1.1) ...
-Setting up libois-1.3.0 (1.3.0+dfsg0-3) ...
-Setting up libois-dev (1.3.0+dfsg0-3) ...
-Processing triggers for libc-bin ...
-ldconfig deferred processing now taking place

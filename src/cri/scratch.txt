@@ -1,0 +1,319 @@
+void CRI::updateClock()
+{
+	bool first;
+	
+	if (clock == NULL)
+	{
+		// Create a manual object for 2D
+		clock = scene->createManualObject("clock");
+	 
+		// Use identity view/projection matrices
+		clock->setUseIdentityProjection(true);
+		clock->setUseIdentityView(true);
+	 
+		clock->begin("BaseWhiteNoLighting", Ogre::RenderOperation::OT_LINE_LIST);
+		
+		first = true;
+		
+		// titleBB = scene->createBillboardSet("Title");
+		// titleBB->setUseIdentityProjection(true);
+		// titleBB->setUseIdentityView(true);
+		// titleBB->setMaterialName("Main/Title");
+		// titleBB->setDefaultDimensions(1.2, 1.6);
+	}
+	else
+	{
+		clock->beginUpdate(0);
+		
+		first = false;
+	}
+	
+	int i;
+	double theta, dtheta;
+	
+	clock->colour(0, 1, 0);
+	
+	dtheta = 2 * M_PI / 36;
+	
+	for (i = 0; i < 36; i++)
+	{
+		theta = i * dtheta;
+		
+		//clock->position(-0.8 + 0.1 * cos(theta), -0.8 + 0.1 * sin(theta), 0.0);
+		//clock->position(-0.8 + 0.1 * cos(theta + dtheta), -0.8 + 0.1 * sin(theta + dtheta), 0.0);
+		
+		if (i % 3 == 0)
+		{
+			clock->position(-0.8 + 0.10 * cos(theta), -0.8 + 0.10 * sin(theta), 0.0);
+			clock->position(-0.8 + 0.16 * cos(theta), -0.8 + 0.16 * sin(theta), 0.0);
+		}
+		else
+		{
+			clock->position(-0.8 + 0.10 * cos(theta), -0.8 + 0.10 * sin(theta), 0.0);
+			clock->position(-0.8 + 0.13 * cos(theta), -0.8 + 0.13 * sin(theta), 0.0);			
+		}
+	}
+	
+	//clock->position(-0.8 + 0.1 * cos(theta - dtheta), -0.8 + 0.1 * sin(theta - dtheta), 0.0);
+	//clock->position(-0.8 + 0.1, -0.8, 0.0);
+	
+	ros::Time current = ros::Time::now();
+	
+	theta = current.toSec() / 60.0 * 2 * M_PI;
+	
+	clock->position(-0.8, -0.8, 0.0);
+	clock->position(-0.8 + 0.1 * cos(-theta - M_PI / 2), 
+		-0.8 + 0.1 * sin(-theta - M_PI / 2), 0.0);
+		
+	//clock->position(-0.8 + 0.1 * cos(-theta - M_PI / 2), 
+	//	-0.8 + 0.1 * sin(-theta - M_PI / 2), 0.0);
+	//clock->position(-0.8 + 0.08 * cos(-theta - M_PI / 2 - 0.3), 
+	//	-0.8 + 0.08 * sin(-theta - M_PI / 2 - 0.3), 0.0);
+	
+	clock->end();
+	 
+	if (first)
+	{
+		// Use infinite AAB to always stay visible
+		Ogre::AxisAlignedBox aabInf;
+		aabInf.setInfinite();
+		clock->setBoundingBox(aabInf);
+		 
+		// Render just before overlays
+		clock->setRenderQueueGroup(Ogre::RENDER_QUEUE_OVERLAY - 1);
+		 
+		// Attach to scene
+		scene->getRootSceneNode()->createChildSceneNode()->attachObject(clock);
+		
+		//titleBB->setBoundingBox(aabInf);
+		// titleBB->setRenderQueueGroup(Ogre::RENDER_QUEUE_OVERLAY - 1);
+		// Ogre::Billboard * billboardElement = titleBB->createBillboard(Ogre::Vector3(0, 0, 0));
+		// scene->getRootSceneNode()->createChildSceneNode()->attachObject(titleBB);
+	}
+}
+
+void Portal::setMousePosition(unsigned int x, unsigned y)
+{
+	// For linux we use the XWindows library directly
+ 	XWarpPointer(Xdisplay, None, Xwindow, 0, 0, 0, 0, x + wLeft, y + wTop);
+ 	XFlush(Xdisplay);
+}
+
+/* No CEGUI in this release
+ * 
+CEGUI::MouseButton convertButton(OIS::MouseButtonID buttonID)
+{
+    switch (buttonID)
+    {
+		case OIS::MB_Left:
+			return CEGUI::LeftButton;
+ 
+		case OIS::MB_Right:
+			return CEGUI::RightButton;
+ 
+		case OIS::MB_Middle:
+			return CEGUI::MiddleButton;
+ 
+		default:
+			return CEGUI::LeftButton;
+    }
+}
+ */
+
+	ignoreNext = false;
+	Xdisplay = XOpenDisplay(0);
+	Xwindow = XRootWindow(Xdisplay, 0);
+
+	//camera->roll(Ogre::Radian(M_PI/2));
+	
+	
+	/*
+	// Icon billboards
+	
+	Ogre::BillboardSet * lightbillboardset = scene->createBillboardSet("lightbbs", 1);
+	lightbillboardset->setMaterialName("Icons/Add");
+	Ogre::Billboard * lightbillboard = lightbillboardset->createBillboard(0,0,100,Ogre::ColourValue(0.5,0.3,0.0f));
+	
+	Ogre::SceneNode * lightNode = cameraNode->createChildSceneNode("Icon1");
+	//scene->getRootSceneNode()->createChildSceneNode("AnimLightNode");
+	lightNode->attachObject(lightbillboardset);
+	//cameraNode->attachObject(lightbillboardset);
+	Ogre::Real s = 0.01f;
+	lightNode->setScale(s,s,s);
+	//lightNode->setPosition(0,0,100);
+	*/
+	
+	// Initialize CEGUI
+
+	/*
+	 * No CEGUI in this release
+	 
+	CEGUI::OgreRenderer& ceRenderer = CEGUI::OgreRenderer::create(*(root->getRenderTarget("Portal Visualizer")));
+    CEGUI::OgreResourceProvider& resProv = CEGUI::OgreRenderer::createOgreResourceProvider();
+    CEGUI::OgreImageCodec& imageCodec = CEGUI::OgreRenderer::createOgreImageCodec();
+    CEGUI::System::create(ceRenderer, (CEGUI::ResourceProvider *)&resProv, static_cast<CEGUI::XMLParser*>(0), 
+		(CEGUI::ImageCodec *)&imageCodec, (CEGUI::ScriptModule *)NULL, CEGUI::String(""), CEGUI::String(packagePath + "/log/CEGUI.log"));
+	CErenderer = &ceRenderer;
+	
+	
+	CEGUI::Imageset::setDefaultResourceGroup("Imagesets");
+	CEGUI::Font::setDefaultResourceGroup("Fonts");
+	CEGUI::Scheme::setDefaultResourceGroup("Schemes");
+	CEGUI::WidgetLookManager::setDefaultResourceGroup("LookNFeel");
+	CEGUI::WindowManager::setDefaultResourceGroup("Layouts");
+	
+	CEGUI::SchemeManager::getSingleton().create("TaharezLook.scheme");
+	CEGUI::System::getSingleton().setDefaultMouseCursor("TaharezLook", "MouseArrow");
+	CEGUI::MouseCursor::getSingleton().setImage( CEGUI::System::getSingleton().getDefaultMouseCursor());
+	
+	*/
+	
+	
+		//main_module = boost::python::import("__main__");
+	//main_namespace = main_module.attr("__dict__");
+	
+	//boost::python::exec(, main_namespace);
+
+	// Test code
+	//pyAddTopicBinding = new PyBlock(main_module, main_namespace);
+	//pyAddTopicBinding->assign("./src/python/AddTopic.py");
+
+
+	if (ignoreNext == true)
+	{
+		ignoreNext = false;
+		return true;
+	}
+	
+	
+	// No CEGUI
+	//CEGUI::System &sys = CEGUI::System::getSingleton();
+	
+	// Scroll wheel.
+	//if (arg.state.Z.rel)
+	//	sys.injectMouseWheelChange(arg.state.Z.rel / 120.0f);
+
+
+
+/*
+ * No CEGUI in this release
+ * 
+void Portal::toggleLocalMenu()
+{
+	
+	CEGUI::WindowManager& wmgr = CEGUI::WindowManager::getSingleton();
+	//Window* myRoot = wmgr.createWindow( "DefaultWindow", "root" );
+	
+	if (menuOn)
+	{
+		// Kill the command window
+		CEGUI::WindowManager::getSingleton().destroyWindow(winRoot);
+		
+		menuOn = false;
+	}
+	else // Show the command window
+	{
+		winRoot = CEGUI::WindowManager::getSingleton().loadWindowLayout( "main.layout" );
+		
+		// Get mouse's current position
+		CEGUI::Point mousePos = CEGUI::MouseCursor::getSingleton().getPosition();  
+		
+		// Set the command window position to be right next to it
+		// Todo:  800 and 600 are magic numbers, none of this
+		winRoot->setPosition( CEGUI::UVector2( CEGUI::UDim( mousePos.d_x / 800.0, 0 ), CEGUI::UDim( mousePos.d_y / 600.0, 0 ) ) );
+		
+		CEGUI::System::getSingleton().setGUISheet( winRoot );
+		
+		setupCEGUIEventHandlers();
+		
+		menuOn = true;
+	}
+	
+	
+	
+	//System::getSingleton().setGUISheet( myRoot );
+	//FrameWindow* fWnd = (FrameWindow*)wmgr.createWindow( "TaharezLook/FrameWindow", "testWindow" );
+	//myRoot->addChildWindow( fWnd );
+	//// position a quarter of the way in from the top-left of parent.
+	//fWnd->setPosition( UVector2( UDim( 0.25f, 0 ), UDim( 0.25f, 0 ) ) );
+
+	//// set size to be half the size of the parent
+	//fWnd->setSize( UVector2( UDim( 0.5f, 0 ), UDim( 0.5f, 0 ) ) );
+	
+	//fWnd->setText( "Hello World!" );
+}
+
+
+void Portal::setupCEGUIEventHandlers()
+{
+	CEGUI::WindowManager& wmgr = CEGUI::WindowManager::getSingleton();
+	//wmgr.getWindow((CEGUI::utf8*)"btnElements")->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&Portal::handleBtnElements, this));
+	//wmgr.getWindow((CEGUI::utf8*)"btnTopics")->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&Portal::handleBtnTopics, this));
+	//wmgr.getWindow((CEGUI::utf8*)"btnScripts")->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&Portal::handleBtnScripts, this));
+	//wmgr.getWindow((CEGUI::utf8*)"btnPick")->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&Portal::handleBtnPick, this));
+	//wmgr.getWindow((CEGUI::utf8*)"btnSettings")->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&Portal::handleBtnSettings, this));
+}
+
+bool Portal::handleBtnElements(const CEGUI::EventArgs& e)
+{
+	// Close local menu
+	toggleLocalMenu();
+	
+	// Execute python code
+	pyQtInterfaceExec->execute((packagePath + "/src/python/ExecListGadgetsDialog.py").c_str());
+	
+    return true;
+}
+
+bool Portal::handleBtnTopics(const CEGUI::EventArgs& e)
+{
+	// Close local menu
+	toggleLocalMenu();
+	
+	// Execute python code
+	pyQtInterfaceExec->execute((packagePath + "/src/python/ExecAddTopicDialog.py").c_str());
+	
+    return true;
+}
+
+bool Portal::handleBtnScripts(const CEGUI::EventArgs& e)
+{
+	// Close local menu
+	toggleLocalMenu();
+	
+	// Execute python code
+	
+    return true;
+}
+
+bool Portal::handleBtnPick(const CEGUI::EventArgs& e)
+{
+	// Close local menu
+	toggleLocalMenu();
+	
+	// Put the GUI in pick mode
+	pickOn = true;
+	
+    return true;
+}
+
+bool Portal::handleBtnSettings(const CEGUI::EventArgs& e)
+{
+	// Close local menu
+	toggleLocalMenu();
+	
+	// Execute python code
+	pyQtInterfaceExec->execute((packagePath + "/src/python/ExecKeyAssignDialog.py").c_str());
+	
+    return true;
+}
+
+*/
+
+
+	// No CEGUI
+	// Tell CEGUI about the click
+	//CEGUI::System::getSingleton().injectMouseButtonDown(convertButton(id));
+	
+			// No CEGUI, but this would've toggle the CEGUI menu
+		//toggleLocalMenu();

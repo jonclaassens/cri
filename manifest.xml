@@ -1,0 +1,33 @@
+<package>
+  <description brief="avatar">
+
+     avatar
+
+  </description>
+  <author>parallels</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/avatar</url>
+
+  <depend package="roscpp"/>
+  <depend package="std_msgs"/>
+  <depend package="tf"/>
+  <depend package="rviz"/>
+  <depend package="resource_retriever"/>
+  <depend package="ogre_tools"/>
+  <depend package="common_rosdeps"/>
+  <depend package="pcl"/>
+  <depend package="pcl_ros"/>
+  <depend package="laser_geometry"/>
+  <depend package="urdf"/>
+  <depend package="urdf_interface"/>
+
+  <depend package="kdl_parser"/>
+  <depend package="robot_state_publisher"/>
+
+  <rosdep name="assimp" />
+  <rosdep name="python" />
+  <rosdep name="boost" />
+</package>
+
+

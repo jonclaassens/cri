@@ -1,0 +1,186 @@
+material Surfaces/FlatVertexColour
+{
+   technique
+   {
+      pass
+      {
+	scene_blend alpha_blend
+
+   	cull_hardware none
+   	cull_software none
+        diffuse vertexcolour
+        specular vertexcolour
+        ambient vertexcolour
+        lighting on
+        
+      }
+   }
+}
+
+material Template/White
+{
+   technique
+   {
+      pass
+      {
+         lighting on
+	 scene_blend alpha_blend
+         depth_write off
+ 
+         ambient 1 1 1 1
+         diffuse 1 1 1 1
+         emissive 0 0 0 1
+      }
+   }
+}
+
+material Template/WhiteNoBlend
+{
+   technique
+   {
+      pass
+      {
+         lighting on
+ 
+         ambient 1 1 1 1
+         diffuse 1 1 1 1
+         emissive 0 0 0 1
+      }
+   }
+}
+
+material Template/Chessboard
+{
+   technique
+   {
+      pass
+      {
+	 scene_blend alpha_blend
+         depth_write off
+         lighting on
+ 
+         ambient 1 1 1 1
+         diffuse 1 1 1 1
+         emissive 0 0 0 1
+ 
+	 texture_unit
+	 {
+	   texture chessboard.jpg
+	   scale 1 1
+	   alpha_op_ex source1 src_manual src_texture 0.3
+	 }
+      }
+   }
+}
+
+material PointCloud/Diamond
+{
+   technique
+   {
+      pass
+      {
+         lighting off
+	 scene_blend alpha_blend
+         depth_write off	
+         diffuse vertexcolour
+         specular vertexcolour
+         ambient vertexcolour
+
+         texture_unit
+         {
+            texture diamond.png
+         }
+      }
+   }
+}
+
+material PointCloud/Circle
+{
+   technique
+   {
+      pass
+      {
+         lighting off
+	 scene_blend alpha_blend
+         depth_write off
+         diffuse vertexcolour
+         specular vertexcolour
+         ambient vertexcolour
+
+         texture_unit
+         {
+            texture circle.png
+         }
+      }
+   }
+}
+
+material PointCloud/Cross
+{
+   technique
+   {
+      pass
+      {
+         lighting off
+	 scene_blend alpha_blend
+         depth_write off
+         diffuse vertexcolour
+         specular vertexcolour
+         ambient vertexcolour
+
+         texture_unit
+         {
+            texture cross.png
+         }
+      }
+   }
+}
+
+material Main/Title
+{
+   technique
+   {
+      pass
+      {
+	 scene_blend alpha_blend
+         depth_write off
+         lighting off
+ 
+         ambient 1 1 1 1
+         diffuse 1 1 1 1
+         emissive 0 0 0 1
+ 
+	 texture_unit
+	 {
+	   texture title.png
+	   scale 1 1
+	   alpha_op_ex source1 src_manual src_texture 1
+	 }
+      }
+   }
+}
+
+material Template/Carpet
+{
+   technique
+   {
+      pass
+      {
+	 scene_blend alpha_blend
+         depth_write off
+         lighting on
+ 
+         ambient 1 1 1 1
+         diffuse 1 1 1 1
+         emissive 0 0 0 1
+ 
+	 texture_unit
+	 {
+	   texture carpet.png
+	   scale 1 1
+	   alpha_op_ex source1 src_manual src_texture 0.5
+	 }
+      }
+   }
+}
+

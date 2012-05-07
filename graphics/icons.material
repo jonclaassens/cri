@@ -1,0 +1,15 @@
+material Icons/Add
+ {
+    technique
+    {
+       pass
+        {
+          texture_unit
+          {
+            texture add.png
+            scale 1 1
+            // this means that the texture will be tiled 10 times (1/10 = 0.1)
+          }
+       }   
+    }
+ }

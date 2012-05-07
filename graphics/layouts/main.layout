@@ -1,0 +1,41 @@
+<?xml version="1.0" ?>
+<GUILayout>
+    <Window Type="DefaultWindow" Name="root">
+        <Window Type="TaharezLook/FrameWindow" Name="winCommand">
+            <Property Name="UnifiedPosition" Value="{ {0, 0}, {0, 0} }" />
+            <Property Name="UnifiedSize" Value="{ {0.2, 0}, {0.3, 0} }" />
+            <Property Name="Text" Value="Command" />
+            <Window Type="TaharezLook/Button" Name="btnElements" >
+                <Property Name="Text" >Elements</Property>
+                <Property Name="UnifiedPosition" Value="{ {0, 0}, {0, 0} }" />
+                <Property Name="UnifiedSize" Value="{ {1, 0}, {0.2, 0} }" />
+                <Property Name="MouseCursorImage" Value="set:TaharezLook image:MouseArrow" />
+            </Window>
+            <Window Type="TaharezLook/Button" Name="btnTopics" >
+                <Property Name="Text" >Topics</Property>       
+                <Property Name="UnifiedPosition" Value="{ {0, 0}, {0.2, 0} }" />
+                <Property Name="UnifiedSize" Value="{ {1, 0}, {0.2, 0} }" />
+                <Property Name="MouseCursorImage" Value="set:TaharezLook image:MouseArrow" />
+            </Window>
+            <Window Type="TaharezLook/Button" Name="btnScripts" >
+                <Property Name="Text" >Scripts</Property>
+                <Property Name="UnifiedPosition" Value="{ {0, 0}, {0.4, 0} }" />
+                <Property Name="UnifiedSize" Value="{ {1, 0}, {0.2, 0} }" />
+                <Property Name="MouseCursorImage" Value="set:TaharezLook image:MouseArrow" />
+            </Window>            
+            <Window Type="TaharezLook/Button" Name="btnPick" >
+                <Property Name="Text" >Pick</Property>
+                <Property Name="UnifiedPosition" Value="{ {0, 0}, {0.6, 0} }" />
+                <Property Name="UnifiedSize" Value="{ {1, 0}, {0.2, 0} }" />
+                <Property Name="MouseCursorImage" Value="set:TaharezLook image:MouseArrow" />
+            </Window>
+            <Window Type="TaharezLook/Button" Name="btnSettings" >
+                <Property Name="Text" >Settings</Property>
+                <Property Name="UnifiedPosition" Value="{ {0, 0}, {0.8, 0} }" />
+                <Property Name="UnifiedSize" Value="{ {1, 0}, {0.2, 0} }" />
+                <Property Name="MouseCursorImage" Value="set:TaharezLook image:MouseArrow" />
+            </Window>
+        </Window>
+    </Window>
+</GUILayout>
+

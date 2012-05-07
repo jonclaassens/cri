@@ -1,0 +1,17 @@
+material Skyboxes/Standard
+{
+        technique
+        {
+                pass
+                {
+                        lighting off
+                        depth_write off
+
+                        texture_unit
+                        {
+                                cubic_texture SB_FR.png SB_BK.png SB_LF.png SB_RT.png SB_UP.png SB_DN.png separateUV
+                                tex_address_mode clamp
+                        }
+                }
+        }
+}
